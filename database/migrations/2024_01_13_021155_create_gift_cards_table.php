@@ -9,17 +9,11 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('beneficios', function (Blueprint $table) {
+        Schema::create('gift_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->text('descripcion');
-            $table->string('pais_beneficio');
-            $table->unsignedBigInteger('marca_id');
             $table->timestamps();
-
-            $table->foreign('marca_id')->references('id')->on('marcas');
         });
     }
 
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('beneficios');
+        Schema::dropIfExists('gift_cards');
     }
 };

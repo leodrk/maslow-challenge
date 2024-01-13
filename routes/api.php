@@ -1,5 +1,11 @@
 <?php
 
+use App\Http\Controllers\BenefictController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VariationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +23,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/company/consumption-last-week/{company}', [CompanyController::class, 'consumptionLastWeek']);
+Route::apiresource('benefict', BenefictController::class);
+Route::apiresource('company', CompanyController::class);
+Route::apiresource('employee', EmployeeController::class);
+Route::apiresource('order', OrderController::class);
+Route::apiresource('user', UserController::class);
+Route::apiresource('variation', VariationController::class);

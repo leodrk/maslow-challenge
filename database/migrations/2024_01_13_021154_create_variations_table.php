@@ -9,12 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('empresas', function (Blueprint $table) {
+        Schema::create('variations', function (Blueprint $table) {
             $table->id();
-            $table->string('razon_social');
-            $table->string('direccion_facturacion');
             $table->timestamps();
         });
     }
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('empresas');
+        Schema::dropIfExists('variations');
     }
 };
