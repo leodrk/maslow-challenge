@@ -15,20 +15,12 @@ class CompanyController extends Controller
     {
     }
 
-    public function create(Request $request)
-    {
-    }
-
     public function store(Request $request)
     {
         return Company::create();
     }
 
     public function show($id)
-    {
-    }
-
-    public function edit($id)
     {
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BenefictController;
+use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\OrderController;
@@ -25,7 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/company/consumption-last-week/{company}', [CompanyController::class, 'consumptionLastWeek']);
-Route::apiresource('benefict', BenefictController::class);
+Route::apiresource('benefit', BenefitController::class);
 Route::apiresource('company', CompanyController::class);
 Route::apiresource('employee', EmployeeController::class);
 Route::apiresource('order', OrderController::class);

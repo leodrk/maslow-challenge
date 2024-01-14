@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class BenefictController extends Controller
+class BenefitController extends Controller
 {
 
 
@@ -16,10 +16,6 @@ class BenefictController extends Controller
     {
     }
 
-    public function create()
-    {
-    }
-
     public function store(Request $request)
     {
         $data = $request->all();
@@ -27,10 +23,6 @@ class BenefictController extends Controller
     }
 
     public function show($id)
-    {
-    }
-
-    public function edit($id)
     {
     }
 

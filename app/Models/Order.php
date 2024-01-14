@@ -11,8 +11,13 @@ class Order extends Model
 
     protected $fillable = [
         'employee_id',
-        'value'
+        'variation_id',
+        'gift_card_id',
+        'local_currency_cost',
+        'local_currency_price',
+        'credits_price'
     ];
+
 
     public function variation() {
         return $this->belongsTo(Variation::class);

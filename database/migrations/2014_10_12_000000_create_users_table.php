@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->enum('role', ['maslow_admin', 'company_admin', 'company_employee'])->default('company_employee');
         });
     }
 

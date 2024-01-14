@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('gift_cards', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('card_number');
+            $table->date('due_date');
+            $table->unsignedInteger('security_code');
         });
     }
 

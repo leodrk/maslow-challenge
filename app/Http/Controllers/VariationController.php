@@ -14,20 +14,12 @@ class VariationController extends Controller
     {
     }
 
-    public function create()
-    {
-    }
-
     public function store(Request $request)
     {
         $data = $request->all();
     }
 
     public function show($id)
-    {
-    }
-
-    public function edit($id)
     {
     }
 

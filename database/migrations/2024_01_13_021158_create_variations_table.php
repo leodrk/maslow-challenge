@@ -14,6 +14,13 @@ return new class extends Migration
         Schema::create('variations', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('title');
+            $table->unsignedInteger('local_currency_cost');
+            $table->unsignedInteger('local_currency_price');
+            $table->unsignedInteger('credits_price');
+            $table->unsignedBigInteger('benefit_id');
+            $table->foreign('benefit_id')->references('id')->on('benefits');
+
         });
     }
 

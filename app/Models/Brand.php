@@ -9,7 +9,12 @@ class Brand extends Model
 {
     use HasFactory;
 
-    public function beneficts() {
-        return $this->hasMany(Benefict::class);
+    protected $fillable = [
+        'name',
+        'description'
+    ];
+
+    public function benefits() {
+        return $this->hasMany(Benefit::class);
     }
 }

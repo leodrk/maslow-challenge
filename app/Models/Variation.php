@@ -9,8 +9,16 @@ class Variation extends Model
 {
     use HasFactory;
 
-    public function benefict() {
-        return $this->belongsTo(Benefict::class);
+    protected $fillable = [
+        'name',
+        'local_currency_cost',
+        'local_currency_price',
+        'credits_price',
+        'benefit_id'
+    ];
+
+    public function benefit() {
+        return $this->belongsTo(Benefit::class);
     }
 
     public function orders() {
