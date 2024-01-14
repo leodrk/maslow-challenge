@@ -29,4 +29,9 @@ class Employee extends Model
     public function orders() {
         return $this->hasMany(Order::class);
     }
+
+    public function getOrders()
+    {
+        return $this->orders()->paginate(10);
+    }
 }

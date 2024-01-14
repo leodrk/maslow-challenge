@@ -23,4 +23,18 @@ class Benefit extends Model
     public function variations() {
         return $this->hasMany(Variation::class);
     }
+
+    public static function getByName($name)
+    {
+        return response()->json(Benefit::query()
+                         ->where('name', '=', $name)
+                         ->paginate(10));
+    }
+
+    public static function getByCountry($country)
+    {
+        return response()->json(Benefit::query()
+            ->where('country_of_benefit', '=', $country)
+            ->paginate(10));
+    }
 }
