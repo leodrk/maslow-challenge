@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\EmployeeController;
@@ -24,29 +25,75 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Companies
-Route::get('/company/{company}/employees', [CompanyController::class, 'getEmployees']);
-Route::get('/company/{company}/employee/{name}', [CompanyController::class, 'getEmployeeByFirstName']);
-Route::get('/company/{company}/employee/{lastName}', [CompanyController::class, 'getEmployeeByLastName']);
-Route::get('/company/consumption-last-week/{company}', [CompanyController::class, 'consumptionLastWeek']);
-Route::get('/company/billing-by-company', [CompanyController::class, 'billingByCompany']);
-Route::apiresource('company', CompanyController::class);
+//Public
+Route::post('register',[AuthController::class, 'register']);
+Route::post('login',[AuthController::class, 'login']);
 
-//Benefits
-Route::get('/benefit/{benefit}/variations', [BenefitController::class, 'getVariations']);
-Route::get('/benefit/{name}', [BenefitController::class,'getByName']);
-Route::get('/benefit/{country}', [BenefitController::class,'getByCountry']);
-Route::apiresource('benefit', BenefitController::class);
+//Authenticated
+Route::middleware(['auth:sanctum'])->group( function () {
+    Route::post('logout',[AuthController::class, 'logout']);
 
-//Employees
-Route::get('/employee/{employee}/orders', [EmployeeController::class, 'getOrders']);
-Route::apiresource('employee', EmployeeController::class);
+    //Companies
+    Route::controller(CompanyController::class)->group(function(){
+        Route::get('/company/{company}/employee/{name}', 'getEmployeeByFirstName');
+        Route::get('/company/{company}/employee/{lastName}', 'getEmployeeByLastName');
+        Route::middleware('restrictRole:maslow_admin,company_admin')->group(function (){
+            Route::get('/company/{company}/employees', 'getEmployees');
+            Route::get('/company/consumption-last-week/{company}', 'consumptionLastWeek');
+        });
+        Route::middleware('restrictRole:maslow_admin')->group(function(){
+            Route::get('/company/billing-by-company', 'billingByCompany');
+            Route::post('api/company', 'store');
+            Route::put('api/company/{company}', 'update');
+            Route::delete('api/company/{company}', 'destroy');
+            Route::apiresource('company', CompanyController::class);
+        });
+    });
 
-//Users
-Route::apiresource('user', UserController::class);
+    //Benefits
+    Route::controller(BenefitController::class)->group(function(){
+        Route::get('/benefit/{benefit}/variations', 'getVariations');
+        Route::get('/benefit/{name}', 'getByName');
+        Route::get('/benefit/{country}', 'getByCountry');
+        Route::middleware('restrictRole:maslow_admin')->group(function(){
+            Route::post('api/benefit', 'store');
+            Route::put('api/benefit/{benefit}','update');
+            Route::delete('api/benefit/{benefit}', 'destroy');
+        });
+        Route::apiresource('benefit', BenefitController::class);
+    });
 
-//Variations
-Route::apiresource('variation', VariationController::class);
+    //Employees
+    Route::controller(EmployeeController::class)->group(function(){
+        Route::get('/employee/{employee}/orders', 'getOrders');
+        Route::middleware('restrictRole:maslow_admin, company_admin')->group(function(){
+            Route::post('api/employee', 'store');
+            Route::put('api/employee/{employee}', 'update');
+            Route::delete('api/employee/{employee}', 'destroy');
+        });
+        Route::middleware('restrictRole:maslow_admin')->group(function(){
+            Route::get('api/employee', 'index');
+        });
+        Route::apiresource('employee', EmployeeController::class);
+    });
 
-//Order
-Route::apiresource('order', OrderController::class);
+    //Variations
+    Route::controller(VariationController::class)->group(function(){
+        Route::middleware('restrictRole:maslow_admin')->group(function(){
+            Route::post('api/variation', 'store');
+            Route::put('api/variation/{variation}', 'update');
+            Route::delete('api/variation/{variation}', 'destroy');
+        });
+        Route::apiresource('variation', VariationController::class);
+    });
+
+    //Order
+    Route::controller(OrderController::class)->group(function(){
+        Route::middleware('restrictRole:maslow_admin')->group(function(){
+            Route::post('api/order', 'store');
+            Route::put('api/order/{order}', 'update');
+            Route::delete('api/order/{order}', 'destroy');
+        });
+        Route::apiresource('variation', VariationController::class);
+    });
+});
