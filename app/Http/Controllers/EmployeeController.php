@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,7 @@ class EmployeeController extends Controller
         return response()->json(['employees' => $employees]);
     }
 
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
         $employee = Employee::query()->create($request->all());
         return response()->json(['employee' => $employee]);
@@ -30,7 +31,7 @@ class EmployeeController extends Controller
         return response()->json(['employee' => $employee]);
     }
 
-    public function update(Request $request, $id)
+    public function update(EmployeeRequest $request, $id)
     {
         $employee = Employee::query()->findOrFail($id, $request->all())->update($request->all());
         return response()->json(['employee' => $employee]);

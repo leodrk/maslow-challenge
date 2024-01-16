@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CompanyRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class CompanyController extends Controller
         return response()->json(['companies' => $companies]);
     }
 
-    public function store(Request $request)
+    public function store(CompanyRequest $request)
     {
         $company = Company::query()->create($request->all());
         return response()->json(['company' => $company]);
@@ -30,7 +31,7 @@ class CompanyController extends Controller
         return response()->json(['company' => $company]);
     }
 
-    public function update(Request $request, $id)
+    public function update(CompanyRequest $request, $id)
     {
         $company = Company::query()->findOrFail($id, $request->all())->update($request->all());
         return response()->json(['company' => $company]);
@@ -44,17 +45,17 @@ class CompanyController extends Controller
 
     public function getEmployees(Company $company)
     {
-        $company->employees()->paginate(10);
+        return $company->employees()->paginate(10);
     }
 
     public function getEmployeeByFirstName(Company $company, $name)
     {
-        $company->getEmployeeByFirstName($name)->paginate(10);
+        return $company->getEmployeeByFirstName($name)->paginate(10);
     }
 
     public function getEmployeeByLastName(Company $company, $lastName)
     {
-        $company->getEmployeeByLastName($lastName)->paginate(10);
+        return $company->getEmployeeByLastName($lastName)->paginate(10);
     }
 
     public function consumptionLastWeek(Company $company)

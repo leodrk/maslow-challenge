@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BenefitRequest;
 use App\Http\Resources\BenefitResource;
 use App\Models\Benefit;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class BenefitController extends Controller
         return response()->json(['benefits' => $benefits]);
     }
 
-    public function store(Request $request)
+    public function store(BenefitRequest $request)
     {
         $benefit = Benefit::query()->create($request->all());
         return response()->json(['benefit' => $benefit]);
@@ -32,7 +33,7 @@ class BenefitController extends Controller
         return response()->json(['benefit' => $benefit]);
     }
 
-    public function update(Request $request, $id)
+    public function update(BenefitRequest $request, $id)
     {
         $benefit = Benefit::query()->findOrFail($id, $request->all())->update($request->all());
         return response()->json(['benefit' => $benefit]);
@@ -56,6 +57,6 @@ class BenefitController extends Controller
 
     public function getVariations(Benefit $benefit)
     {
-        $benefit->variations()->paginate(10);
+        return $benefit->variations()->paginate(10);
     }
 }

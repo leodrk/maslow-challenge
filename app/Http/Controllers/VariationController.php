@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VariationRequest;
 use App\Models\Variation;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class VariationController extends Controller
         return response()->json(['variations' => $variations]);
     }
 
-    public function store(Request $request)
+    public function store(VariationRequest $request)
     {
         $variation = Variation::query()->create($request->all());
         return response()->json(['variation' => $variation]);
@@ -29,7 +30,7 @@ class VariationController extends Controller
         return response()->json(['variation' => $variation]);
     }
 
-    public function update(Request $request, $id)
+    public function update(VariationRequest $request, $id)
     {
         $variation = Variation::query()->findOrFail($id, $request->all())->update($request->all());
         return response()->json(['variation' => $variation]);
@@ -39,10 +40,5 @@ class VariationController extends Controller
     {
         Variation::query()->findOrFail($id)->delete();
         return response(['message' => 'OK'], 200);
-    }
-
-    public function getOrders(Variation $variation)
-    {
-        $variation->orders()->paginate(10);
     }
 }
