@@ -25,7 +25,7 @@ class EmployeeRequest extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'date_of_birth' => 'required|date',
-            'credit_balance' => 'required|integer',
+            'credit_balance' => 'integer',
             'company_id' => 'required|exists:companies,id',
             'user_id' => 'required|exists:users,id',
         ];
