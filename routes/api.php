@@ -60,8 +60,8 @@ Route::middleware(['auth:sanctum'])->group( function () {
             Route::put('api/benefit/{benefit}','update');
             Route::delete('api/benefit/{benefit}', 'destroy');
         });
-        Route::apiresource('benefit', BenefitController::class);
     });
+    Route::apiresource('benefit', BenefitController::class);
 
     //Employees
     Route::controller(EmployeeController::class)->group(function(){

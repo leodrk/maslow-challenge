@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CompanyRequest;
+use App\Http\Requests\CompanyUpdateRequest;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,9 +32,9 @@ class CompanyController extends Controller
         return response()->json(['company' => $company]);
     }
 
-    public function update(CompanyRequest $request, $id)
+    public function update(CompanyUpdateRequest $request, $id)
     {
-        $company = Company::query()->findOrFail($id, $request->all())->update($request->all());
+        $company = Company::query()->findOrFail($id)->update($request->all());
         return response()->json(['company' => $company]);
     }
 

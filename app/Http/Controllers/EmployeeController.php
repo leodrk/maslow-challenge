@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeeRequest;
+use App\Http\Requests\EmployeeUpdateRequest;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -31,9 +32,9 @@ class EmployeeController extends Controller
         return response()->json(['employee' => $employee]);
     }
 
-    public function update(EmployeeRequest $request, $id)
+    public function update(EmployeeUpdateRequest $request, $id)
     {
-        $employee = Employee::query()->findOrFail($id, $request->all())->update($request->all());
+        $employee = Employee::query()->findOrFail($id)->update($request->all());
         return response()->json(['employee' => $employee]);
     }
 

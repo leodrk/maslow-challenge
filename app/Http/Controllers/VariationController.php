@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\VariationRequest;
+use App\Http\Requests\VariationUpdateRequest;
 use App\Models\Variation;
 use Illuminate\Http\Request;
 
@@ -30,9 +31,9 @@ class VariationController extends Controller
         return response()->json(['variation' => $variation]);
     }
 
-    public function update(VariationRequest $request, $id)
+    public function update(VariationUpdateRequest $request, $id)
     {
-        $variation = Variation::query()->findOrFail($id, $request->all())->update($request->all());
+        $variation = Variation::query()->findOrFail($id)->update($request->all());
         return response()->json(['variation' => $variation]);
     }
 

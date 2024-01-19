@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BenefitRequest;
+use App\Http\Requests\BenefitUpdateRequest;
 use App\Http\Resources\BenefitResource;
 use App\Models\Benefit;
 use Illuminate\Http\Request;
@@ -33,11 +34,13 @@ class BenefitController extends Controller
         return response()->json(['benefit' => $benefit]);
     }
 
-    public function update(BenefitRequest $request, $id)
+    public function update(BenefitUpdateRequest $request, $id)
     {
-        $benefit = Benefit::query()->findOrFail($id, $request->all())->update($request->all());
+        $benefit = Benefit::query()->findOrFail($id)->update($request->all());
         return response()->json(['benefit' => $benefit]);
     }
+
+
 
     public function destroy($id)
     {

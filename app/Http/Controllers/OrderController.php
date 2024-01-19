@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderRequest;
+use App\Http\Requests\OrderUpdateRequest;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -31,9 +32,9 @@ class OrderController extends Controller
         return response()->json(['order' => $order]);
     }
 
-    public function update(OrderRequest $request, $id)
+    public function update(OrderUpdateRequest $request, $id)
     {
-        $order = Order::query()->findOrFail($id, $request->all())->update($request->all());
+        $order = Order::query()->findOrFail($id)->update($request->all());
         return response()->json(['order' => $order]);
     }
 
