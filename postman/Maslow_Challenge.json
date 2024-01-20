@@ -1,0 +1,1676 @@
+{
+    "info": {
+        "_postman_id": "4b76f767-c9c1-4d70-8934-38499e9d350a",
+        "name": "Maslow Challenge",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "_exporter_id": "8646998"
+    },
+    "item": [
+        {
+            "name": "Login",
+            "item": [
+                {
+                    "name": "api/register",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    ""
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "noauth"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\":\"test\",\r\n    \"email\":\"test@test.com\",\r\n    \"password\":\"testtest\",\r\n    \"role\":\"maslow_admin\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/register",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "register"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api/login",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "var res = pm.response.json();\r",
+                                    "pm.environment.set('token', res.accessToken);"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "noauth"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"email\":\"test@test.com\",\r\n    \"password\":\"testtest\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/login",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "login"
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "api/logout",
+                    "event": [
+                        {
+                            "listen": "test",
+                            "script": {
+                                "exec": [
+                                    "pm.environment.set('token', null);"
+                                ],
+                                "type": "text/javascript"
+                            }
+                        }
+                    ],
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/logout",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "logout"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Company",
+            "item": [
+                {
+                    "name": "index",
+                    "item": [
+                        {
+                            "name": "api/company",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/company",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "company"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "store",
+                    "item": [
+                        {
+                            "name": "api/company",
+                            "request": {
+                                "auth": {
+                                    "type": "bearer",
+                                    "bearer": [
+                                        {
+                                            "key": "token",
+                                            "value": "{{token}}",
+                                            "type": "string"
+                                        }
+                                    ]
+                                },
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\r\n    \"legal_name\":\"\",\r\n    \"billing_adress\":\"\"\r\n}"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/company",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "company"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "show",
+                    "item": [
+                        {
+                            "name": "api/company/{company}",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/company/:company",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "company",
+                                        ":company"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "company"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "update",
+                    "item": [
+                        {
+                            "name": "api/company/{company}",
+                            "request": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\r\n    \"legal_name\": \"\",\r\n    \"billing_address\": \"\"\r\n}\r\n"
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/company/1",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "company",
+                                        "1"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "destroy",
+                    "item": [
+                        {
+                            "name": "api/company/{company}",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/company/:company",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "company",
+                                        ":company"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "company"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Company Employees",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/company/:company/employees",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "company",
+                                ":company",
+                                "employees"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "company"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Consumption Last Week",
+                    "request": {
+                        "auth": {
+                            "type": "bearer",
+                            "bearer": [
+                                {
+                                    "key": "token",
+                                    "value": "{{token}}",
+                                    "type": "string"
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Authorization",
+                                "value": "Bearer {{token}}",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/company/consumption-last-week/:company",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "company",
+                                "consumption-last-week",
+                                ":company"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "company",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Billing By Company",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/company/billing-by-company",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "company",
+                                "billing-by-company"
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Benefit",
+            "item": [
+                {
+                    "name": "index",
+                    "item": [
+                        {
+                            "name": "api/benefit",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/benefit",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "benefit"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "store",
+                    "item": [
+                        {
+                            "name": "api/benefit",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "urlencoded",
+                                    "urlencoded": [
+                                        {
+                                            "key": "name",
+                                            "value": null,
+                                            "description": "The name field is required., The name field must be a string., The name field must not be greater than 255 characters.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "description",
+                                            "value": null,
+                                            "description": "The description field is required., The description field must be a string.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "country_of_benefit",
+                                            "value": null,
+                                            "description": "The country of benefit field is required., The country of benefit field must be a string., The country of benefit field must be 3 characters., The country of benefit field must only contain letters.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "brand_id",
+                                            "value": null,
+                                            "description": "The brand id field is required., The selected brand id is invalid.",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/benefit",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "benefit"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "show",
+                    "item": [
+                        {
+                            "name": "api/benefit/{benefit}",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/benefit/:benefit",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "benefit",
+                                        ":benefit"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "benefit"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "update",
+                    "item": [
+                        {
+                            "name": "api/benefit/{benefit}",
+                            "request": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "urlencoded",
+                                    "urlencoded": [
+                                        {
+                                            "key": "name",
+                                            "value": null,
+                                            "description": "The name field must be a string., The name field must not be greater than 255 characters.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "description",
+                                            "value": null,
+                                            "description": "The description field must be a string.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "country_of_benefit",
+                                            "value": null,
+                                            "description": "The country of benefit field must be a string., The country of benefit field must be 3 characters., The country of benefit field must only contain letters.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "brand_id",
+                                            "value": null,
+                                            "description": "The selected brand id is invalid.",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/benefit/:benefit",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "benefit",
+                                        ":benefit"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "benefit"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "destroy",
+                    "item": [
+                        {
+                            "name": "api/benefit/{benefit}",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/benefit/:benefit",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "benefit",
+                                        ":benefit"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "benefit"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Benefit Variations",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/benefit/:benefit/variations",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "benefit",
+                                ":benefit",
+                                "variations"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "benefit"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Benefit By Name",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/benefit/name/:name",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "benefit",
+                                "name",
+                                ":name"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "name",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Benefit By Country",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/benefit/country/:country",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "benefit",
+                                "country",
+                                ":country"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "country",
+                                    "value": ""
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Employee",
+            "item": [
+                {
+                    "name": "index",
+                    "item": [
+                        {
+                            "name": "api/employee",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/employee",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "employee"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "store",
+                    "item": [
+                        {
+                            "name": "api/employee",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "urlencoded",
+                                    "urlencoded": [
+                                        {
+                                            "key": "first_name",
+                                            "value": null,
+                                            "description": "The first name field is required., The first name field must be a string., The first name field must not be greater than 255 characters.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "last_name",
+                                            "value": null,
+                                            "description": "The last name field is required., The last name field must be a string., The last name field must not be greater than 255 characters.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "date_of_birth",
+                                            "value": null,
+                                            "description": "The date of birth field is required., The date of birth field must be a valid date.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "credit_balance",
+                                            "value": null,
+                                            "description": "The credit balance field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "company_id",
+                                            "value": null,
+                                            "description": "The company id field is required., The selected company id is invalid.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "user_id",
+                                            "value": null,
+                                            "description": "The user id field is required., The selected user id is invalid.",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/employee",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "employee"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "show",
+                    "item": [
+                        {
+                            "name": "api/employee/{employee}",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/employee/:employee",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "employee",
+                                        ":employee"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "employee"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "update",
+                    "item": [
+                        {
+                            "name": "api/employee/{employee}",
+                            "request": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "urlencoded",
+                                    "urlencoded": [
+                                        {
+                                            "key": "first_name",
+                                            "value": "jorge",
+                                            "description": "The first name field must be a string., The first name field must not be greater than 255 characters.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "last_name",
+                                            "value": null,
+                                            "description": "The last name field must be a string., The last name field must not be greater than 255 characters.",
+                                            "type": "text",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "date_of_birth",
+                                            "value": null,
+                                            "description": "The date of birth field must be a valid date.",
+                                            "type": "text",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "credit_balance",
+                                            "value": null,
+                                            "description": "The credit balance field must be an integer.",
+                                            "type": "text",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "company_id",
+                                            "value": null,
+                                            "description": "The selected company id is invalid.",
+                                            "type": "text",
+                                            "disabled": true
+                                        },
+                                        {
+                                            "key": "user_id",
+                                            "value": null,
+                                            "description": "The selected user id is invalid.",
+                                            "type": "text",
+                                            "disabled": true
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/employee/:employee",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "employee",
+                                        ":employee"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "employee",
+                                            "value": ""
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "destroy",
+                    "item": [
+                        {
+                            "name": "api/employee/{employee}",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/employee/:employee",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "employee",
+                                        ":employee"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "employee"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Employee Orders",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/employee/:employee/orders",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "employee",
+                                ":employee",
+                                "orders"
+                            ],
+                            "variable": [
+                                {
+                                    "key": "employee"
+                                }
+                            ]
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Variation",
+            "item": [
+                {
+                    "name": "index",
+                    "item": [
+                        {
+                            "name": "api/variation",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/variation",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "variation"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "store",
+                    "item": [
+                        {
+                            "name": "api/variation",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "urlencoded",
+                                    "urlencoded": [
+                                        {
+                                            "key": "title",
+                                            "value": "dwadad",
+                                            "description": "The title field is required., The title field must be a string., The title field must not be greater than 255 characters.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "local_currency_cost",
+                                            "value": "2313",
+                                            "description": "The local currency cost field is required., The local currency cost field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "local_currency_price",
+                                            "value": "3214",
+                                            "description": "The local currency price field is required., The local currency price field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "credits_price",
+                                            "value": "3131",
+                                            "description": "The credits price field is required., The credits price field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "benefit_id",
+                                            "value": "1",
+                                            "description": "The benefit id field is required., The selected benefit id is invalid.",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/variation",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "variation"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "show",
+                    "item": [
+                        {
+                            "name": "api/variation/{variation}",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/variation/:variation",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "variation",
+                                        ":variation"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "variation"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "update",
+                    "item": [
+                        {
+                            "name": "api/variation/{variation}",
+                            "request": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "urlencoded",
+                                    "urlencoded": [
+                                        {
+                                            "key": "title",
+                                            "value": null,
+                                            "description": "The title field must be a string., The title field must not be greater than 255 characters.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "local_currency_cost",
+                                            "value": null,
+                                            "description": "The local currency cost field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "local_currency_price",
+                                            "value": null,
+                                            "description": "The local currency price field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "credits_price",
+                                            "value": null,
+                                            "description": "The credits price field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "benefit_id",
+                                            "value": null,
+                                            "description": "The selected benefit id is invalid.",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/variation/:variation",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "variation",
+                                        ":variation"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "variation"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "destroy",
+                    "item": [
+                        {
+                            "name": "api/variation/{variation}",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/variation/:variation",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "variation",
+                                        ":variation"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "variation"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Order",
+            "item": [
+                {
+                    "name": "destroy",
+                    "item": [
+                        {
+                            "name": "api/order/{order}",
+                            "request": {
+                                "method": "DELETE",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/order/:order",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "order",
+                                        ":order"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "order"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "store",
+                    "item": [
+                        {
+                            "name": "api/order",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "urlencoded",
+                                    "urlencoded": [
+                                        {
+                                            "key": "local_currency_cost",
+                                            "value": null,
+                                            "description": "The local currency cost field is required., The local currency cost field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "local_currency_price",
+                                            "value": null,
+                                            "description": "The local currency price field is required., The local currency price field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "credits_price",
+                                            "value": null,
+                                            "description": "The credits price field is required., The credits price field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "employee_id",
+                                            "value": null,
+                                            "description": "The employee id field is required., The selected employee id is invalid.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "variation_id",
+                                            "value": null,
+                                            "description": "The variation id field is required., The selected variation id is invalid.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "gift_card_id",
+                                            "value": null,
+                                            "description": "The gift card id field is required., The selected gift card id is invalid.",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/order",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "order"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "show",
+                    "item": [
+                        {
+                            "name": "api/order/{order}",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/order/:order",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "order",
+                                        ":order"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "order"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "update",
+                    "item": [
+                        {
+                            "name": "api/order/{order}",
+                            "request": {
+                                "method": "PUT",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "urlencoded",
+                                    "urlencoded": [
+                                        {
+                                            "key": "local_currency_cost",
+                                            "value": null,
+                                            "description": "The local currency cost field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "local_currency_price",
+                                            "value": null,
+                                            "description": "The local currency price field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "credits_price",
+                                            "value": null,
+                                            "description": "The credits price field must be an integer.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "employee_id",
+                                            "value": null,
+                                            "description": "The selected employee id is invalid.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "variation_id",
+                                            "value": null,
+                                            "description": "The selected variation id is invalid.",
+                                            "type": "text"
+                                        },
+                                        {
+                                            "key": "gift_card_id",
+                                            "value": null,
+                                            "description": "The selected gift card id is invalid.",
+                                            "type": "text"
+                                        }
+                                    ]
+                                },
+                                "url": {
+                                    "raw": "{{base_url}}/api/order/:order",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "order",
+                                        ":order"
+                                    ],
+                                    "variable": [
+                                        {
+                                            "key": "order"
+                                        }
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                },
+                {
+                    "name": "index",
+                    "item": [
+                        {
+                            "name": "api/order",
+                            "request": {
+                                "method": "GET",
+                                "header": [
+                                    {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "url": {
+                                    "raw": "{{base_url}}/api/order",
+                                    "host": [
+                                        "{{base_url}}"
+                                    ],
+                                    "path": [
+                                        "api",
+                                        "order"
+                                    ]
+                                }
+                            },
+                            "response": []
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "bearer",
+        "bearer": [
+            {
+                "key": "token",
+                "value": "{{token}}",
+                "type": "string"
+            }
+        ]
+    },
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000"
+        }
+    ]
+}
