@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+    web:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        ports:
+            - "8000:80"
+        depends_on:
+            - mysql
+        volumes:
+            - .:/var/www/html
+        networks:
+            - laravel
+
+    mysql:
+        image: mysql:latest
+        environment:
+            MYSQL_DATABASE: laravel
+            MYSQL_PASSWORD: root
+            MYSQL_ROOT_PASSWORD: root
+        networks:
+            - laravel
+
+networks:
+    laravel:
+        driver: bridge
