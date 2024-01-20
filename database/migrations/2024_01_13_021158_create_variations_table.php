@@ -20,7 +20,6 @@ return new class extends Migration
             $table->unsignedInteger('credits_price');
             $table->unsignedBigInteger('benefit_id');
             $table->foreign('benefit_id')->references('id')->on('benefits');
-
         });
     }
 

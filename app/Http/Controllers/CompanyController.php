@@ -49,16 +49,6 @@ class CompanyController extends Controller
         return $company->employees()->paginate(10);
     }
 
-    public function getEmployeeByFirstName(Company $company, $name)
-    {
-        return $company->getEmployeeByFirstName($name)->paginate(10);
-    }
-
-    public function getEmployeeByLastName(Company $company, $lastName)
-    {
-        return $company->getEmployeeByLastName($lastName)->paginate(10);
-    }
-
     public function consumptionLastWeek(Company $company)
     {
         return $company->consumptionLastWeek();

@@ -10,7 +10,7 @@ class Variation extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'title',
         'local_currency_cost',
         'local_currency_price',
         'credits_price',
