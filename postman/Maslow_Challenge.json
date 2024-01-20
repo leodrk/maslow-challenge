@@ -1,6 +1,6 @@
 {
     "info": {
-        "_postman_id": "4b76f767-c9c1-4d70-8934-38499e9d350a",
+        "_postman_id": "3155c20e-ccee-4ac3-b703-02653b97b647",
         "name": "Maslow Challenge",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         "_exporter_id": "8646998"
@@ -67,7 +67,7 @@
                             "script": {
                                 "exec": [
                                     "var res = pm.response.json();\r",
-                                    "pm.environment.set('token', res.accessToken);"
+                                    "pm.collectionVariables.set('token', res.accessToken);"
                                 ],
                                 "type": "text/javascript"
                             }
@@ -90,7 +90,7 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\r\n    \"email\":\"test@test.com\",\r\n    \"password\":\"testtest\"\r\n}",
+                            "raw": "{\r\n    \"email\":\"maslow_admin@test.com\",\r\n    \"password\":\"rootroot\"\r\n}",
                             "options": {
                                 "raw": {
                                     "language": "json"
@@ -1671,6 +1671,11 @@
         {
             "key": "base_url",
             "value": "http://localhost:8000"
+        },
+        {
+            "key": "token",
+            "value": "",
+            "type": "string"
         }
     ]
 }
