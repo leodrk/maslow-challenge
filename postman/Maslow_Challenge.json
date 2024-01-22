@@ -1,6 +1,6 @@
 {
     "info": {
-        "_postman_id": "3155c20e-ccee-4ac3-b703-02653b97b647",
+        "_postman_id": "c03f03d5-4f76-46e8-b2a5-0521af694e0f",
         "name": "Maslow Challenge",
         "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         "_exporter_id": "8646998"
@@ -67,7 +67,7 @@
                             "script": {
                                 "exec": [
                                     "var res = pm.response.json();\r",
-                                    "pm.collectionVariables.set('token', res.accessToken);"
+                                    "pm.collectionVariables.set('maslow_token', res.accessToken);"
                                 ],
                                 "type": "text/javascript"
                             }
@@ -117,23 +117,13 @@
                             "listen": "test",
                             "script": {
                                 "exec": [
-                                    "pm.environment.set('token', null);"
+                                    "pm.collectionVariables.set('maslow_token', null);"
                                 ],
                                 "type": "text/javascript"
                             }
                         }
                     ],
                     "request": {
-                        "auth": {
-                            "type": "bearer",
-                            "bearer": [
-                                {
-                                    "key": "token",
-                                    "value": "{{token}}",
-                                    "type": "string"
-                                }
-                            ]
-                        },
                         "method": "POST",
                         "header": [
                             {
@@ -256,6 +246,11 @@
                                     {
                                         "key": "Content-Type",
                                         "value": "application/json"
+                                    },
+                                    {
+                                        "key": "Aut",
+                                        "value": "",
+                                        "type": "text"
                                     }
                                 ],
                                 "url": {
@@ -270,7 +265,8 @@
                                     ],
                                     "variable": [
                                         {
-                                            "key": "company"
+                                            "key": "company",
+                                            "value": ""
                                         }
                                     ]
                                 }
@@ -1642,7 +1638,7 @@
         "bearer": [
             {
                 "key": "token",
-                "value": "{{token}}",
+                "value": "{{maslow_token}}",
                 "type": "string"
             }
         ]
@@ -1673,7 +1669,7 @@
             "value": "http://localhost:8000"
         },
         {
-            "key": "token",
+            "key": "maslow_token",
             "value": "",
             "type": "string"
         }
